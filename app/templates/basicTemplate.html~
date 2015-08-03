@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="BostonBikr">
+    <meta name="author" content="GauravKaushik">
+    <link rel="icon" href="../static/img/BostonBikr.ico">
+
+    <title>BostonBikr</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='../static/css/bootstrap.min.css' rel='stylesheet' />
+
+    <script src='http://api.tiles.mapbox.com/mapbox.js/v2.0.1/mapbox.js' type='text/javascript'></script>
+    <link href='http://api.tiles.mapbox.com/mapbox.js/v2.0.1/mapbox.css' rel='stylesheet' />
+	<script>
+	L.mapbox.accessToken = 			'pk.eyJ1IjoiZ2F1cmF2OTE2IiwiYSI6IjQ1MTQyMzliYzRkM2JiMWZhNzc5N2I0Nzg4NzhkMWYwIn0.ijhVLyeyp8i8G5g6FkvbQg';
+	var map = L.mapbox.map('map', 'gaurav916.6e4f51b4').setView([42.373, -71.103], 13);
+	</script>
+      <script src='http://code.jquery.com/jquery-2.1.1.min.js'></script>
+    <link href='../static/css/BostonBikr.css' rel='stylesheet' />
+    <script src='../static/js/BostonBikr.js' type='text/javascript'></script>
+
+  </head>
+
+  <body onload='Load()'>
+    <div class='navbar navbar-inverse navbar-fixed-top' role='navigation'>
+      <div class='container'>
+        <div class='navbar-header'>
+          <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
+            <span class='sr-only'>Toggle navigation</span>
+            <span class='icon-bar'></span>
+            <span class='icon-bar'></span>
+            <span class='icon-ba'></span>
+          </button>
+          <a class='navbar-brand' href='/'>BostonBikr</a>
+        </div>
+        <div class='collapse navbar-collapse'>
+          <ul class='nav navbar-nav'>
+
+            <li><a href='https://github.com/gaurav-kaushik/BostonBikr'>GitHub</a></li>
+            <li><a href='https://www.linkedin.com/in/gauravkaushikphd'>LinkedIn</a></li>
+            <li><a href='https://twitter.com/_gauravkaushik'>Twitter</a></li>
+            <li><a href='/about'>About</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id='menu' style = "background-color: #73FF85;">
+      Start Address:&nbsp;&nbsp;&nbsp;<input type='searchBox' id = 'startPt' value = '50 Milk Street, Boston, MA'><br>
+      Finish Address:&nbsp;&nbsp;&nbsp;&nbsp;<input type='searchBox' id = 'endPt' value = 'Kendall/MIT, Cambridge, MA'><br>
+      Biking Max [km]: <input type = searchBox' id = 'runDist' value = 3><br>
+      <button onclick="PathSearch()">Submit</button>
+      <h4 id = "addmessage"></h4>	
+
+      <div id='loading'><span></span><img src='../static/img/bikeLoading.gif' alt='icon for loading'>
+	</div>
+    </div>
+	<div id='map'></div>
+
+
+
+  </body>
+</html>
+
+

@@ -1,0 +1,16 @@
+{% extends 'basicTemplate_GK.html' %}
+{% block content %}
+
+    <div id='map'></div>
+
+    <div id='menu' style = "background-color: #D8D8D8;">
+      Start:&nbsp;&nbsp;&nbsp;<input type='searchBox' id = 'startPt' value = '50 Milk Street, Boston, MA'><br>
+      Finish:&nbsp;&nbsp;&nbsp;&nbsp;<input type='searchBox' id = 'endPt' value = 'Kendall/MIT, Cambridge, MA'><br>
+      Goal in km: <input type = searchBox' id = 'runDist' value = 3><br>
+      <button onclick="PathSearch()">Submit</button>
+      <h4 id = "addmessage"></h4>	
+
+      <div id='loading'><span></span><img src='../static/img/bikeLoading.gif' alt='icon for loading'></div>
+    </div>
+
+{% endblock %}

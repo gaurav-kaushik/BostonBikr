@@ -1,0 +1,98 @@
+/*.navbar-inverse {
+    background-color: #9e00ce;
+}*/
+.navbar-brand {
+    font-family: 'Roboto', sans-serif; !important;
+    float: left;
+    height: 50px;
+    padding: 15px 5px;
+    font-size: 24px;
+    line-height: 20px;
+}
+
+.navbar-inverse .navbar-brand {
+    font-family: 'Roboto', sans-serif; !important;
+    color: #FFFFFF;
+}
+.navbar-inverse .navbar-nav>li>a {
+    font-family: 'Roboto', sans-serif; !important;
+    color: #FFFFFF;
+    padding-top : 18px;
+}
+
+body {
+    margin : 0;
+    padding : 0;
+    padding-top : 50px;
+}
+
+#map {
+    position : absolute;
+    height : calc(100% - 50px);
+    width : 100%;
+    z-index: -1;
+}
+
+#menu {
+    font-family: 'Roboto', sans-serif; !important;
+    display: block; 
+    float: right;
+    left: 0px;
+    bottom: 0px;
+    height: 720px;
+    width: 200px;
+    margin : 0px;
+    position : relative;
+    text-align : left;
+    top : 0px;
+    padding: 5px;
+    background-color: #FFFFFF;
+    padding-top: 10px;
+}
+
+h4{
+    font-family: 'Roboto', sans-serif;
+    text-align : justify;
+}
+#loading {
+    background-color: lightgray;
+    display: block;
+    height: 100%;
+    left: 0;
+    opacity: 0.5;
+    position: fixed;
+    text-align : center;
+    top: 0;
+    visibility : hidden;
+    width: 100%;
+    z-index: 1;
+}
+
+#loading span {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+#loading img {
+    vertical-align : top;
+    z-index : 99;
+}
+
+#menu div{
+    border : 2px solid gray;
+    border-radius : 3px;
+}
+
+#menu #searchBox input{
+    border : 1px solid gray;
+    width: 200px;
+    border-radius : 10px;
+    padding: 20px;
+}
+
+#menu div {
+    background-color : #222;
+    padding : 0px;
+}
+

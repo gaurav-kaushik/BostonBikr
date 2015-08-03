@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>A simple map</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<script>
+L.mapbox.accessToken = 'pk.eyJ1IjoiZ2F1cmF2OTE2IiwiYSI6IjQ1MTQyMzliYzRkM2JiMWZhNzc5N2I0Nzg4NzhkMWYwIn0.ijhVLyeyp8i8G5g6FkvbQg';
+var map = L.mapbox.map('map', 'mapbox.streets')
+    .setView([42.3698, -71.0941], 13);
+</script>
+</body>
+</html>
+
+# gaurav916.6e4f51b4

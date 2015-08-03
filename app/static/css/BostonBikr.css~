@@ -1,0 +1,71 @@
+body {
+    margin : 0;
+    padding : 0;
+    padding-top : 50px;
+}
+
+#map {
+    position : absolute;
+    height : calc(100% - 50px);
+    width : 100%;
+    z-index: -1;
+}
+
+#menu {
+    font-family:PT Sans Narrow !important;
+    display: block; 
+    float: right;
+    left: 0px;
+    bottom: 0px;
+    height: 720px;
+    width: 182px;
+    margin : 0px;
+    position : relative;
+    text-align : middle;
+    top : 0px;
+}
+h4{
+	
+	
+}
+#loading {
+    background-color: lightgray;
+    display: block;
+    height: 100%;
+    left: 0;
+    opacity: 0.5;
+    position: fixed;
+    text-align : center;
+    top: 0;
+    visibility : hidden;
+    width: 100%;
+    z-index: 1;
+}
+
+#loading span {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+#loading img {
+    vertical-align : top;
+    z-index : 99;
+}
+
+#menu div{
+    border : 2px solid gray;
+    border-radius : 3px;
+}
+
+#menu #searchBox input{
+    border : 1px solid gray;
+    width: 250px;
+    border-radius : 10px;
+}
+
+#menu div {
+    background-color : #E8E8FF;
+    padding : 0px;
+}
+
