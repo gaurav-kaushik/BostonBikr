@@ -341,7 +341,7 @@ def GeoCode(address):
     from urllib import quote
     # encode address query into URL
     # GAURAV: scrub the text after 'key=' before committing!
-    url = 'https://maps.googleapis.com/maps/api/geocode/json?address={}&sensor=false&key=AIzaSyAuTD9VmT0560fNFTg_ajxtsgOJp7H3ooo'.format(quote(address))
+    url = 'https://maps.googleapis.com/maps/api/geocode/json?address={}&sensor=false&key={}'.format(quote(address, gAPI_key))
     # call API and extract json
     print 'Calling Google for the following address: ' + address
     jData = urlopen(url).read()
@@ -561,8 +561,7 @@ def PathTestMashUp(startPt, endPt, runDis=3):
 #        pathString = " Enjoy your ride!"            
 #    message += '\n' + pathString
     message += " Enjoy your ride!"
-    # OR deliver a TABLE -- not h4 but what is needed?
-    
+
     # Create the new map layer with path and markers
     # turn locales in geojson object
     markers = GeoJsonifyMarkers(pathLocales)
@@ -585,15 +584,7 @@ def PathTestMashUp(startPt, endPt, runDis=3):
             'message': message,
             'locales': GeoJsonifyMarkers(pathLocales)
             }
-#    json = {
-#            'bounds': bounds,
-#            'startPt': GeoJsonify(startCor),
-#            'endPt': GeoJsonify(endCor), 
-#            'dist': pathLength,
-#            'path': GeoJsonify(shortestPath),
-#            'score': score,
-#            'message': message
-#            }
+
     return json # FOR APP
     
 #    return json, shortestPath, pathLength, nxH, pathLocales, pathNodes # FOR TESTING
