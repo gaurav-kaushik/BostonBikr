@@ -41,8 +41,7 @@ def GeoCode(address):
     from urllib2 import urlopen
     from urllib import quote
     # encode address query into URL
-    # GAURAV: scrub the text after 'key=' before committing!
-    url = 'https://maps.googleapis.com/maps/api/geocode/json?address={}&sensor=false&key=AIzaSyAuTD9VmT0560fNFTg_ajxtsgOJp7H3ooo'.format(quote(address))
+    url = 'https://maps.googleapis.com/maps/api/geocode/json?address={}&sensor=false&key={}'.format(quote(address, gAPI_key))
     # call API and extract json
     print 'Calling Google for the following address: ' + address
     jData = urlopen(url).read()
@@ -100,35 +99,7 @@ for idx, node in enumerate(reBostonGeoBound):
 pickle.dump(reBostonGeoBound, open("reBostonGeoBound.p","wb"))
 pickle.dump(reBostonLoc, open("reBostonLoc.p","wb"))
 
-## THE BELOW ARE NOW IMPORTED FROM BOSTONBIKR.py
-#def findNearestNodeNX(graph, lookUpNode):
-#    # Find the closest node to your geocoded location
-#    minDist = 99999.9 
-#    for node in graph.nodes():
-#        curDist = distanceCal(node, lookUpNode)
-#        if curDist < minDist:
-#            minDist = curDist
-#            minNode = node
-#    return minNode
-#
-#def distanceCal4par(lon1, lat1, lon2, lat2):
-#    R = 6373000
-#    lon1 = radians(lon1)
-#    lat1 = radians(lat1)
-#    lon2 = radians(lon2)
-#    lat2 = radians(lat2)
-#    dlon = lon2 - lon1
-#    dlat = lat2 - lat1
-#    a = (sin(dlat/2))**2 + cos(lat1) * cos(lat2) * (sin(dlon/2))**2
-#    c = 2 * atan2(sqrt(a), sqrt(1-a))
-#    distance = R * c
-#    return distance  
-#
-#def distanceCal(cor1, cor2):
-#    return distanceCal4par(cor1[0], cor1[1], cor2[0], cor2[1])
-
-
-# Let's take these nodes and create a 2D Gaussian Space
+# Let's take these nodes and create a 2D Gaussian function
 def bostonGauss(node, sigma=2355.0):
     xNode, yNode = node[0], node[1]
     metersPerLat = 82190.6
@@ -285,13 +256,6 @@ def harmonicWeight(node1, node2, Z=Z_master):
 # The weight is the score given by your gaussian function above
 # You can also add a 'location' tag to nodes so the user
 # can see where they're going to be near on your route.
-#newNX = nx.Graph()
-#for edge in bostonGraphNX.edges(data=True):
-#    # Get existing edge properties
-#    u = edge[0]
-#    v = edge[1]
-#    dist = edge[2]['weight']
-#    newNX.add_edge(u,v, distance=dist, weight=harmonicWeight(u,v))
 newNX = nx.Graph()
 for edge in bostonGraphNX.edges(data=True):
     # Get existing edge properties
