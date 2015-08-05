@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
 """
+reTrip will take text files of TripAdvisor data and turn them into Geocoded locations to transpose onto the map.
+This uses a rather hacky text-based method because of time constraints. A full-featured web crawler that could be used for many pages or other sites at once would be much better. But since we only collect data once, this works OK for now.
 Created on Wed Jul 22 09:47:51 2015
-
 @author: gaurav
 """
 
