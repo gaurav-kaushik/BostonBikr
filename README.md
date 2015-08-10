@@ -1,5 +1,5 @@
 # BostonBikr
-Insight Health Data Science Project 2015
+Insight Health Data Science Project 2015 by Gaurav Kaushik
 
 Website: bostonbikr.com
 
