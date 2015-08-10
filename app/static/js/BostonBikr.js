@@ -4,13 +4,13 @@ var bounds = [[42.34, -71.113], [42.44, -71.09]];
 var LineStringOpt = {color : 'green', opacity : 0.5, weight : 8};
 var paths = [];
 var markers = [];
-var accessToken = 'pk.eyJ1IjoiZ2F1cmF2OTE2IiwiYSI6IjQ1MTQyMzliYzRkM2JiMWZhNzc5N2I0Nzg4NzhkMWYwIn0.ijhVLyeyp8i8G5g6FkvbQg';
+var accessToken = '';
 var message = '';
 
 function Load() {
     // Initialize MapBox map<script>
     L.mapbox.accessToken = accessToken;
-    map = L.mapbox.map('map', 'gaurav916.6e4f51b4').setView([42.373, -71.103], 13);
+    map = L.mapbox.map('map', '').setView([42.373, -71.103], 13);
 };
 
 
