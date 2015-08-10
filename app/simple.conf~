@@ -1,8 +1,0 @@
-[program:myserver]
-command=/home/gaurav/anaconda/bin/gunicorn views:app -w 4 -b 0.0.0.0:80
-directory=/home/gaurav/anaconda/BostonBikr/app/
-
-[supervisord]
-logfile=/home/gaurav/anaconda/BostonBikr/app/supervisord.log
-loglevel=debug
-user=root
