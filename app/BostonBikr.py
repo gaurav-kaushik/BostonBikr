@@ -1,20 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Jul 13 14:38:18 2015
-
-@author: gaurav
+BostonBikr.py will allow the user to import a map (from a SQL database or local files) and run path-finding calculations on it.
 """
 
-#import sys
-#from json import loads as JSONLoad
-#from os.path import exists as Exists
 from math import sin, cos, sqrt, atan2, acos, radians
-#from random import randint, random, seed
-#from operator import itemgetter
 from Queue import Queue
 from sets import Set
-#from prioritydictionary import priorityDictionary
-#from prioritydictionary2 import priorityDictionary
 #import pymysql as mdb
 import pickle
 import networkx as nx
@@ -23,6 +14,7 @@ from random import randint, sample, choice
 import operator
 from geneticAlgorithm import geneticPath
 from geojson import Feature, Point, FeatureCollection
+
 """ 
 DEFINE CONSTANTS
 R = radius of Earth
