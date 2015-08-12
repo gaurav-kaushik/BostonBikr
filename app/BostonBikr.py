@@ -41,7 +41,6 @@ def cor2ID(cor):
     tp = (cor[0], cor[1])
     return tp
 
-# GAURAV -- figure out what's needed here and remove extraneous items
 def distanceCal4par(lon1, lat1, lon2, lat2):
     #compute the distance between (lon1, lat1) and (lon2, lat2)
     lon1 = radians(lon1)
@@ -327,7 +326,7 @@ class Graph(Vertex):
 WEB STUFF!
 Here, we have methods to:
 1. convert an 'address' <type string> to a geocoordinate (GeoCode)
-2. take a 'geoItem' <type ???> and turn it into a geoJSON type (GeoJsonify)
+2. take a 'geoItem' and turn it into a geoJSON type (GeoJsonify)
 3. define a boundary and check that our coordinates are within it (inBounds)
 4. build a dictionary from a set (buildDict)
 5. create a 'MiniWorld' map, in which we query our sql database for a subset
@@ -340,7 +339,6 @@ def GeoCode(address):
     from urllib2 import urlopen
     from urllib import quote
     # encode address query into URL
-    # GAURAV: scrub the text after 'key=' before committing!
     url = 'https://maps.googleapis.com/maps/api/geocode/json?address={}&sensor=false&key={}'.format(quote(address, gAPI_key))
     # call API and extract json
     print 'Calling Google for the following address: ' + address
@@ -356,8 +354,6 @@ def GeoCode(address):
     return (longitude, latitude)
 
 def GeoJsonify(geoItem):
-    '''http://en.wikipedia.org/wiki/GeoJSON'''
-    ###
     if isinstance(geoItem, list):
         geoJSON = {  
                  'type' : 'Feature',
@@ -367,7 +363,6 @@ def GeoJsonify(geoItem):
                     'coordinates': geoItem,
                  }
             }
-    ###
     elif isinstance(geoItem, tuple):   
         geoJSON = {
             'type' : 'Feature',
@@ -401,16 +396,15 @@ def inBounds(node, bounds):
     return False
 
 def buildDict(vSet, gDict):
-    ###
-    # This is a auxiliary function for Dijkstra's shortest path algorithm,
-    ### 
     for v in vSet:
         gDict[v.getID()] = {'Dist': maxVal, 'pred':None}
     return  
 
 def getMapBoundary(): 
     #define the boundary of the miniworld
-    bounds = pickle.load(open("/home/gaurav/anaconda/BostonBikr/app/static/bostonMetroArea_bounds.p", "rb"))
+    # In this toy version, you can load this pickle from the Static folder
+    # The real version calls edges from a database
+    bounds = pickle.load(open("./static/bostonMetroArea_bounds.p", "rb"))
     return bounds
 
 def findNearestNodeNX(graph, lookUpNode):
@@ -479,8 +473,10 @@ def PathTestMashUp(startPt, endPt, runDis=3):
     The website will call this function. 
     """
     ## Load up your necessary variables
-    nxGraph = pickle.load(open("/home/gaurav/anaconda/BostonBikr/app/static/bostonMetroArea_Weighted_Locs.p", "rb"))
-    nxPos = pickle.load(open("/home/gaurav/anaconda/BostonBikr/app/static/bostonMetroArea_pos.p", "rb"))
+    # In this toy version, you can load this pickle from the Static folder
+    # The real version calls edges from a database upon each query and rebuilds the map around your start and end coordinates
+    nxGraph = pickle.load(open("./static/bostonMetroArea_Weighted_Locs.p", "rb"))
+    nxPos = pickle.load(open("./static/bostonMetroArea_pos.p", "rb"))
     targetDis = runDis*1000+1 # convert km to m
     
      # Use the Google to find geolocation ,type tuple> for your start/endPt <type string>
@@ -504,17 +500,10 @@ def PathTestMashUp(startPt, endPt, runDis=3):
 #     Calculate weighted and unweighted Dijkstras
     shortestPath_uw, nxH_uw, _, pathLength_uw = nxShortestPath(nxGraph, nxPos, startNode, endNode, Dijk=0)
     shortestPath_w, nxH_w, _, pathLength_w = nxShortestPath(nxGraph, nxPos, startNode, endNode, Dijk=1)
-
-##     #If the weighted-Dijkstra is too far from your goal, let's run genetics
-##     #Later, we can try discarding this altogether so each path is random
-#    targetDis += 0.001
-#    error_w = (targetDis-pathLength_w)/targetDis
-#    print error_w
     
     # Run the genetic algorithm!
     gene = geneticPath(startNode, endNode, targetDis)
     shortestPath_g, pathLength_g, error_g = gene.Evolution()
-#    iterations = gene.iterations
     nxH_g = nx.subgraph(nxGraph, gene.finalSpecies)
     nxH = nxH_g
     shortestPath = shortestPath_g
@@ -544,22 +533,6 @@ def PathTestMashUp(startPt, endPt, runDis=3):
             unique_locales.append(ls)
     pathLocales = unique_locales
     
-#    # Deliver a string that lists the paths
-#    if pathLocations:
-#        pathString = " On this route you will bike near: "
-#        if len(pathLocations) == 1:
-#            pathString  = " " + pathLocations[0] + "."
-#        else:
-#            for ind, loc in enumerate(pathLocations):
-#                if ind == len(pathLocations)-1:
-#                    pathString += "and " + loc + "."
-#                else:
-#                    pathString += " " + loc + ", "
-#    try:
-#        pathString += " Enjoy your ride!"
-#    except:
-#        pathString = " Enjoy your ride!"            
-#    message += '\n' + pathString
     message += " Enjoy your ride!"
 
     # Create the new map layer with path and markers
@@ -594,13 +567,4 @@ if __name__ == "__main__":
     start = 'Fenway, Boston, MA'
     end = 'Fresh Pond, MA'
     distance = 16
-    try:
-        json, shortestPath, pathLength, nxH, pathLocales, pathNodes = PathTestMashUp(start, end, distance)
-        print json['message']
-        nxGraph = pickle.load(open("/home/gaurav/anaconda/BostonBikr/app/static/bostonMetroArea_Weighted_Locs.p", "rb"))
-        nxPos = pickle.load(open("/home/gaurav/anaconda/BostonBikr/app/static/bostonMetroArea_pos.p", "rb"))    
-        #    # Test plots
-        #nxPlot(nxGraph, nxPos) # plot whole map
-        plotPath(nxGraph, nxH, nxPos) # plots your path
-    except:
-        json = PathTestMashUp(start, end, distance)
+    json = PathTestMashUp(start, end, distance)
