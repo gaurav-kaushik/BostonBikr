@@ -1,5 +1,0 @@
-#!/home/gaurav/anaconda/bin/python
-from app import app
-app.run(debug = True)
-
-# This script will import the app object and run it
